@@ -10,10 +10,10 @@ const RobotFigure = (props) => {
   }
 
   return (
-    <Figure onClick={handleClick}>
+    <Figure>
       <Figure.Image src={robot.image} alt="robot" />
       <Figure.Caption>{robot.name}</Figure.Caption>
-      <Button>Choose Robot</Button>
+      <Button onClick={handleClick}>Choose Robot</Button>
     </Figure>
   )
 }

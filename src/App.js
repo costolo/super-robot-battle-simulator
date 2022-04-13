@@ -1,7 +1,12 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState } from 'react'
-import robots from './utils/robots'
+import {
+  robots,
+  computeWinningRobot,
+  isRobotOneWinner,
+  isRobotTwoWinner
+} from './utils'
 import HamburgerIcon from './icons/HamburgerIcon'
 import RobotCard from './components/RobotCard'
 import MainButton from './components/MainButton'
@@ -13,6 +18,7 @@ function App() {
   const [robotOne, setRobotOne] = useState({})
   const [robotTwo, setRobotTwo] = useState({})
   const [mainButtonDisabled, setMainButtonDisabled] = useState(true)
+  const [winningRobot, setWinningRobot] = useState(null)
 
   const incrementGameStep = () => {
     const nextStep = step + 1
@@ -26,9 +32,14 @@ function App() {
       setRobotTwo(robot)
       setMainButtonDisabled(false)
     }
-
     incrementGameStep()
   }
+
+  const handleMainButtonClick = () => {
+    const winningRobot = computeWinningRobot(robotOne, robotTwo)
+    setWinningRobot(winningRobot)
+  }
+
   return (
     <div className="App">
       <div className="App__header-container">
@@ -38,11 +49,15 @@ function App() {
         <div className="App__header">Super Robot Battle Simulator</div>
       </div>
       <div className="App__robot-card-container">
-        <RobotCard robot={robotOne} />
-        <RobotCard robot={robotTwo} />
+        <RobotCard robot={robotOne} winner={isRobotOneWinner(winningRobot, robotOne)} />
+        <RobotCard robot={robotTwo} winner={isRobotTwoWinner(winningRobot, robotTwo)} />
       </div>
       <div className="App__main-button-container"></div>
-      <MainButton disabled={mainButtonDisabled} />
+      <MainButton
+        disabled={mainButtonDisabled}
+        step={step}
+        onClick={handleMainButtonClick}
+      />
       <div className="App__robot-figure-container">
         {robots.map((robot) => (
           <RobotFigure
