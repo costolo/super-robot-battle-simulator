@@ -14,11 +14,17 @@ import RobotFigure from './components/RobotFigure'
 import AddRobotModal from './components/AddRobotModal'
 
 function App() {
+  const blankRobot = {
+    attack: 'N/A',
+    defense: 'N/A',
+    image: '',
+    name: 'N/A'
+  }
   /** state vars */
   const [robotList, setRobotList] = useState(robots)
   const [step, setStep] = useState(0)
-  const [robotOne, setRobotOne] = useState({})
-  const [robotTwo, setRobotTwo] = useState({})
+  const [robotOne, setRobotOne] = useState(blankRobot)
+  const [robotTwo, setRobotTwo] = useState(blankRobot)
   const [mainButtonDisabled, setMainButtonDisabled] = useState(true)
   const [winningRobot, setWinningRobot] = useState(null)
   const [showAddRobotModal, setShowAddRobotModal] = useState(false)
@@ -80,9 +86,7 @@ function App() {
   }
 
   const handleDeleteRobot = (robot) => {
-    const newRobotList = robotList.filter(
-      (robo) => robo.name !== robot.name
-    )
+    const newRobotList = robotList.filter((robo) => robo.name !== robot.name)
     setRobotList(newRobotList)
   }
 

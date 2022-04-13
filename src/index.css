@@ -38,8 +38,13 @@ code {
 }
 
 /* Robot Figure */
-.robot-figure__image {
-  width: 300px;
+.robot-figure {
+  width: 150px;
+  margin-right: 1rem;
+}
+
+.robot-figure button {
+  width: 100%;
 }
 
 /* Add Robot Modal */

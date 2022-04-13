@@ -22,15 +22,6 @@ const RobotCard = (props) => {
 
 export default RobotCard
 
-RobotCard.defaultProps = {
-  robot: {
-    attack: 'N/A',
-    defense: 'N/A',
-    image: '',
-    name: 'N/A'
-  }
-}
-
 RobotCard.propTypes = {
   robot: PropTypes.object,
   winner: PropTypes.bool
