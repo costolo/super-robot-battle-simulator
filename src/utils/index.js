@@ -1,3 +1,4 @@
+import add from '../images/add.png'
 const robots = [
   {
     attack: 30,
@@ -34,6 +35,12 @@ const robots = [
     defense: 30,
     name: 'R.O.B.',
     image: 'https://robohash.org/rob'
+  },
+  {
+    attack: null,
+    defense: null,
+    name: '',
+    image: add 
   }
 ]
 

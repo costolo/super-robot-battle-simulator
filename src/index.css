@@ -36,3 +36,13 @@ code {
 .robot-card {
   width: 30rem;
 }
+
+/* Robot Figure */
+.robot-figure__image {
+  width: 300px;
+}
+
+/* Add Robot Modal */
+.form-error {
+  color: #d9534f;
+}
