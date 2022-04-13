@@ -11,6 +11,7 @@
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
     "morgan": "^1.10.0",
+    "prop-types": "^15.8.1",
     "react": "^17.0.1",
     "react-bootstrap": "^2.2.3",
     "react-dom": "^17.0.1",
