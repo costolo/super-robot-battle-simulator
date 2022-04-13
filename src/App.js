@@ -70,13 +70,20 @@ function App() {
       name,
       image: `https://robohash.org/${name}`
     }
-    
+
     const lastElement = robotList[robotList.length - 1]
     const newRobotArray = robotList.slice(0, -1)
     newRobotArray.push(robot)
     newRobotArray.push(lastElement)
     setRobotList(newRobotArray)
     setShowAddRobotModal(false)
+  }
+
+  const handleDeleteRobot = (robot) => {
+    const newRobotList = robotList.filter(
+      (robo) => robo.name !== robot.name
+    )
+    setRobotList(newRobotList)
   }
 
   return (
@@ -110,6 +117,7 @@ function App() {
             key={robot.name}
             robot={robot}
             handleSetRobot={handleSetRobot}
+            handleDeleteRobot={handleDeleteRobot}
             handleAddRobotModalShow={handleAddRobotModalShow}
             step={step}
           />
