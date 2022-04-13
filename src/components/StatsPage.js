@@ -18,11 +18,11 @@ const StatsPage = () => {
           </tr>
         </thead>
         <tbody>
-          {stats.map((stat) => {
+          {stats.map((stat, index) => {
             const { robotOne, robotTwo, winningRobot } = stat
 
             return (
-              <tr>
+              <tr key={index}>
                 <td>{robotOne.name}</td>
                 <td>{robotTwo.name}</td>
                 <td>{winningRobot.name}</td>

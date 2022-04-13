@@ -80,10 +80,11 @@ const AddRobotModal = (props) => {
               <div className="form-error">Defense must be a valid integer</div>
             )}
           </Form.Group>
-          <Button onClick={handleClose}>Close</Button>
-          <Button variant="primary" type="submit">
-            Add Robot
-          </Button>
+          <div className="add-robot-modal__button-container">
+            <Button variant="primary" type="submit">
+              Add Robot
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

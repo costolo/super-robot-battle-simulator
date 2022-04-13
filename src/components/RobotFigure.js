@@ -40,9 +40,16 @@ const RobotFigure = (props) => {
         {!robot.name ? 'Add Robot' : 'Choose Robot'}
       </Button>
       {robot.name && (
-        <Button variant="danger" onClick={handleDeleteClick}>
+        <Button
+          className="robot-figure__delete"
+          variant="danger"
+          onClick={handleDeleteClick}
+        >
           Delete Robot
         </Button>
+      )}
+      {!robot.name && (
+        <Button className="robot-figure__hidden-button robot-figure__delete">hidden</Button>
       )}
     </Figure>
   )

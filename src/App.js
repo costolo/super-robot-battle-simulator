@@ -134,13 +134,19 @@ function App() {
               winner={isRobotTwoWinner(winningRobot, robotTwo)}
             />
           </div>
-          <div className="App__main-button-container"></div>
-          <MainButton
-            disabled={mainButtonDisabled}
-            step={step}
-            onClick={handleMainButtonClick}
-            resetGameState={resetGameState}
-          />
+          <div className="App__main-button-container">
+            <MainButton
+              disabled={mainButtonDisabled}
+              step={step}
+              onClick={handleMainButtonClick}
+              resetGameState={resetGameState}
+            />
+          </div>
+          {step < 2 && (
+            <div className="App__player-turn">
+              {step === 0 ? 'Player 1 Select' : 'Player 2 Select'}
+            </div>
+          )}
           <div className="App__robot-figure-container">
             {robotList.map((robot) => (
               <RobotFigure
@@ -154,11 +160,6 @@ function App() {
               />
             ))}
           </div>
-          {step < 2 && (
-            <div className="App__player-turn">
-              {step === 0 ? 'Player 1 Select' : 'Player 2 Select'}
-            </div>
-          )}
         </div>
       )}
       {page === 'stats' && <StatsPage />}

@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
+.App__header-container,
+.App__robot-card-container,
+.App__main-button-container,
+.App__robot-figure-container,
+.App__player-turn {
+  margin-bottom: 1rem;
+}
+
+/* App styles */
 .App__header-container {
   position: relative;
 }
@@ -32,6 +41,10 @@ code {
   justify-content: space-evenly;
 }
 
+.App__player-turn {
+  font-size: 1.5rem;
+}
+
 /* Robot Card */
 .robot-card {
   width: 30rem;
@@ -49,6 +62,14 @@ code {
 
 .robot-figure button {
   width: 100%;
+}
+
+.robot-figure__delete {
+  margin-top: 1rem;
+}
+
+.robot-figure__hidden-button {
+  visibility: hidden;
 }
 
 /* Add Robot Modal */
