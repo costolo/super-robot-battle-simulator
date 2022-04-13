@@ -20,11 +20,21 @@ function App() {
   const [mainButtonDisabled, setMainButtonDisabled] = useState(true)
   const [winningRobot, setWinningRobot] = useState(null)
 
+  /** UI utility functions */
   const incrementGameStep = () => {
     const nextStep = step + 1
     setStep(nextStep)
   }
 
+  const resetGameState = () => {
+    setStep(0)
+    setRobotOne({})
+    setRobotTwo({})
+    setMainButtonDisabled(true)
+    setWinningRobot(null)
+  }
+
+  /** Event handlers */
   const handleSetRobot = (robot) => {
     if (step === 0) {
       setRobotOne(robot)
@@ -37,6 +47,7 @@ function App() {
 
   const handleMainButtonClick = () => {
     const winningRobot = computeWinningRobot(robotOne, robotTwo)
+    incrementGameStep()
     setWinningRobot(winningRobot)
   }
 
@@ -57,6 +68,7 @@ function App() {
         disabled={mainButtonDisabled}
         step={step}
         onClick={handleMainButtonClick}
+        resetGameState={resetGameState}
       />
       <div className="App__robot-figure-container">
         {robots.map((robot) => (
