@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App__header-container {
+  position: relative;
+}
+
+.App__header {
+  font-size: 2rem;
+}
+
+.App__hamburger {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
