@@ -37,6 +37,10 @@ code {
   width: 30rem;
 }
 
+.robot-card__specs {
+  list-style-type: none;
+}
+
 /* Robot Figure */
 .robot-figure {
   width: 150px;

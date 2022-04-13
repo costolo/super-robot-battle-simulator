@@ -8,7 +8,8 @@ const RobotFigure = (props) => {
     handleSetRobot,
     handleAddRobotModalShow,
     step,
-    handleDeleteRobot
+    handleDeleteRobot,
+    robotOne
   } = props
 
   const handleSelectClick = () => {
@@ -23,6 +24,10 @@ const RobotFigure = (props) => {
     handleDeleteRobot(robot)
   }
 
+  const isButtonDisabled = () => {
+    return step >= 2 || robotOne.name === robot.name
+  }
+
   return (
     <Figure className="robot-figure">
       <Figure.Image
@@ -31,8 +36,7 @@ const RobotFigure = (props) => {
         alt="robot"
       />
       <Figure.Caption>{robot.name}</Figure.Caption>
-      <Button onClick={handleSelectClick} disabled={step >= 2}>
-        {' '}
+      <Button onClick={handleSelectClick} disabled={isButtonDisabled()}>
         {!robot.name ? 'Add Robot' : 'Choose Robot'}
       </Button>
       {robot.name && (
@@ -49,7 +53,8 @@ RobotFigure.propTypes = {
   handleSetRobot: PropTypes.func.isRequired,
   handleAddRobotModalShow: PropTypes.func.isRequired,
   handleDeleteRobot: PropTypes.func.isRequired,
-  step: PropTypes.number.isRequired
+  step: PropTypes.number.isRequired,
+  robotOne: PropTypes.object.isRequired
 }
 
 export default RobotFigure

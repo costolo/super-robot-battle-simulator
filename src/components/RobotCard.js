@@ -9,7 +9,7 @@ const RobotCard = (props) => {
       <Card.Img src={robot.image}></Card.Img>
       <Card.Body>
         <Card.Title>{robot.name}</Card.Title>
-        <ul>
+        <ul className='robot-card__specs'>
           <li>Attack: {robot.attack}</li>
           <li>Defense: {robot.defense}</li>
         </ul>

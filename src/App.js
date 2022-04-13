@@ -5,15 +5,25 @@ import {
   robots,
   computeWinningRobot,
   isRobotOneWinner,
-  isRobotTwoWinner
+  isRobotTwoWinner,
+  initializeLocalStorage,
+  setWinningStatsToLocalStorage
 } from './utils'
 import HamburgerIcon from './icons/HamburgerIcon'
 import RobotCard from './components/RobotCard'
 import MainButton from './components/MainButton'
 import RobotFigure from './components/RobotFigure'
 import AddRobotModal from './components/AddRobotModal'
+import NavMenu from './components/NavMenu'
+import StatsPage from './components/StatsPage'
 
 function App() {
+  /** Stats initialization */
+  const stats = window.localStorage.getItem('stats')
+  if (!stats) {
+    initializeLocalStorage()
+  }
+
   const blankRobot = {
     attack: 'N/A',
     defense: 'N/A',
@@ -28,6 +38,8 @@ function App() {
   const [mainButtonDisabled, setMainButtonDisabled] = useState(true)
   const [winningRobot, setWinningRobot] = useState(null)
   const [showAddRobotModal, setShowAddRobotModal] = useState(false)
+  const [page, setPage] = useState('battle')
+  const [showMenu, setShowMenu] = useState(false)
 
   /** UI utility functions */
   const incrementGameStep = () => {
@@ -41,6 +53,13 @@ function App() {
     setRobotTwo({})
     setMainButtonDisabled(true)
     setWinningRobot(null)
+    setPage('battle')
+    setShowMenu(false)
+  }
+
+  const setActivePage = (page) => {
+    setPage(page)
+    setShowMenu(!showMenu)
   }
 
   /** Event handlers */
@@ -58,6 +77,7 @@ function App() {
     const winningRobot = computeWinningRobot(robotOne, robotTwo)
     incrementGameStep()
     setWinningRobot(winningRobot)
+    setWinningStatsToLocalStorage(robotOne, robotTwo, winningRobot)
   }
 
   const handleAddRobotModalShow = () => {
@@ -90,52 +110,70 @@ function App() {
     setRobotList(newRobotList)
   }
 
+  const handleHamburgerClick = () => {
+    setShowMenu(!showMenu)
+  }
+
   return (
     <div className="App">
       <div className="App__header-container">
-        <div className="App__hamburger">
+        <div className="App__hamburger" onClick={handleHamburgerClick}>
           <HamburgerIcon />
         </div>
         <div className="App__header">Super Robot Battle Simulator</div>
       </div>
-      <div className="App__robot-card-container">
-        <RobotCard
-          robot={robotOne}
-          winner={isRobotOneWinner(winningRobot, robotOne)}
-        />
-        <RobotCard
-          robot={robotTwo}
-          winner={isRobotTwoWinner(winningRobot, robotTwo)}
-        />
-      </div>
-      <div className="App__main-button-container"></div>
-      <MainButton
-        disabled={mainButtonDisabled}
-        step={step}
-        onClick={handleMainButtonClick}
-        resetGameState={resetGameState}
-      />
-      <div className="App__robot-figure-container">
-        {robotList.map((robot) => (
-          <RobotFigure
-            key={robot.name}
-            robot={robot}
-            handleSetRobot={handleSetRobot}
-            handleDeleteRobot={handleDeleteRobot}
-            handleAddRobotModalShow={handleAddRobotModalShow}
+      {page === 'battle' && (
+        <div>
+          <div className="App__robot-card-container">
+            <RobotCard
+              robot={robotOne}
+              winner={isRobotOneWinner(winningRobot, robotOne)}
+            />
+            <RobotCard
+              robot={robotTwo}
+              winner={isRobotTwoWinner(winningRobot, robotTwo)}
+            />
+          </div>
+          <div className="App__main-button-container"></div>
+          <MainButton
+            disabled={mainButtonDisabled}
             step={step}
+            onClick={handleMainButtonClick}
+            resetGameState={resetGameState}
           />
-        ))}
-      </div>
-      {step < 2 && (
-        <div className="App__player-turn">
-          {step === 0 ? 'Player 1 Select' : 'Player 2 Select'}
+          <div className="App__robot-figure-container">
+            {robotList.map((robot) => (
+              <RobotFigure
+                key={robot.name}
+                robot={robot}
+                handleSetRobot={handleSetRobot}
+                handleDeleteRobot={handleDeleteRobot}
+                handleAddRobotModalShow={handleAddRobotModalShow}
+                step={step}
+                robotOne={robotOne}
+              />
+            ))}
+          </div>
+          {step < 2 && (
+            <div className="App__player-turn">
+              {step === 0 ? 'Player 1 Select' : 'Player 2 Select'}
+            </div>
+          )}
         </div>
       )}
+      {page === 'stats' && <StatsPage />}
       <AddRobotModal
         show={showAddRobotModal}
         handleClose={handleAddRobotModalClose}
         handleAddRobot={handleAddRobot}
+      />
+      <NavMenu
+        page={page}
+        show={showMenu}
+        handleClose={() => {
+          setShowMenu(false)
+        }}
+        handleSetPage={setActivePage}
       />
     </div>
   )

@@ -40,7 +40,7 @@ const robots = [
     attack: null,
     defense: null,
     name: '',
-    image: add 
+    image: add
   }
 ]
 
@@ -74,5 +74,42 @@ const isRobotTwoWinner = (winningRobot, robotTwo) => {
   return robotTwo.name === winningRobot.name
 }
 
+const initializeLocalStorage = () => {
+  window.localStorage.setItem('stats', [])
+}
 
-export { robots, computeWinningRobot, isRobotOneWinner, isRobotTwoWinner }
+const setWinningStatsToLocalStorage = (robotOne, robotTwo, winningRobot) => {
+  const rawStats = window.localStorage.getItem('stats')
+  const payload = {
+    robotOne,
+    robotTwo,
+    winningRobot
+  }
+  const initialPayloadStr = JSON.stringify([payload])
+  if (!rawStats) {
+    window.localStorage.setItem('stats', initialPayloadStr)
+  } else {
+    const stats = JSON.parse(rawStats)
+    stats.push(payload)
+    const statsStr = JSON.stringify(stats)
+    window.localStorage.setItem('stats', statsStr)
+  }
+}
+
+const getStats = () => {
+  const stats = window.localStorage.getItem('stats')
+  if (!stats) {
+    return []
+  }
+  return JSON.parse(stats)
+}
+
+export {
+  robots,
+  computeWinningRobot,
+  isRobotOneWinner,
+  isRobotTwoWinner,
+  initializeLocalStorage,
+  setWinningStatsToLocalStorage,
+  getStats
+}
