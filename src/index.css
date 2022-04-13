@@ -26,3 +26,13 @@ code {
   left: 10px;
   cursor: pointer;
 }
+
+.App__robot-card-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Robot Card */
+.robot-card {
+  width: 30rem;
+}

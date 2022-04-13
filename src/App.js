@@ -1,6 +1,10 @@
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import robots from './utils/robots'
 import HamburgerIcon from './icons/HamburgerIcon'
+import RobotCard from './components/RobotCard'
+import MainButton from './components/MainButton'
+import RobotFigure from './components/RobotFigure'
 
 function App() {
   return (
@@ -11,11 +15,20 @@ function App() {
         </div>
         <div className="App__header">Super Robot Battle Simulator</div>
       </div>
-      {/* hamburger */}
-      {/* header */}
-      {/* card container */}
-      {/* fight/reset button */}
-      {/* scrollable robot container */}
+      <div className="App__robot-card-container">
+        <RobotCard robot={robots[0]} />
+        <RobotCard robot={robots[1]} />
+      </div>
+      <div className="App__main-button-container"></div>
+      <MainButton />
+      <div className="App__robot-figure-container">
+        {robots.map((robot) => (
+          <RobotFigure robot={robot} />
+        ))}
+      </div>
+      <div className="App__player-turn">
+        Player 1 Select
+      </div>
     </div>
   )
 }
